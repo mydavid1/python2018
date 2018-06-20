@@ -1,0 +1,34 @@
+import csv
+f = open('지역별흡연율폐암발생률.csv')
+data = csv.reader(f)
+next(data)
+next(data)
+흡연율 = []
+폐암환자비율 = []
+지역=[]
+for row in data :
+    흡연율.append(float(row[2]))
+    폐암환자비율.append(float(row[3]))
+    지역.append(row[0])
+
+import matplotlib.pyplot as plt
+
+plt.figure(dpi = 300)
+
+plt.rc('font',family='Malgun Gothic')
+
+#index, y1_value, bar_width, tick_label=x_name, align='center', alpha=opacity, color='b', label='rainfall'
+
+plt.bar(range(17),폐암환자비율, width=0.5, label = '폐암환자비율 (명/10만명)', color='r')
+plt.bar(range(17),흡연율, width=0.7, label = '흡연율 (명/100명)',color='gray',alpha=0.7)
+plt.title('흡연과 폐암의 관계')
+
+plt.xticks(range(17), 지역, fontsize=8)
+plt.yticks(fontsize=9)
+
+plt.xlabel('지역',fontsize=10)
+plt.ylabel('비율',fontsize=10)
+
+plt.legend()
+
+plt.show() 
